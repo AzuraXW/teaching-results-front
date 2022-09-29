@@ -7,7 +7,7 @@ import "./mock";
 import layoutComponents from './components/layout'
 import { getBanner } from "./api/banner";
 
-import "./assets/main.css";
+import "./styles/base/base.scss"
 import "normalize.css/normalize.css";
 
 const app = createApp(App);

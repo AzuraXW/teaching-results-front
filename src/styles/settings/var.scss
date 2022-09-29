@@ -1,19 +1,12 @@
 // color
-$color-primary: #ff5777;
+$color-primary: #0064aa;  // 主题色
 $color-white: #fff;
-$color-black: #000;
+$color-gray: #494949;
+$color-hover: #1189de;  // 悬浮颜色
 
-$color-text-primary: #333333;
-$color-text-secondary: #666666;
-$color-text-tertiary: $color-white;
-$color-text-quaternary: $color-primary;
+$text-color: $color-gray;  // 文字颜色
 
-$border-color-base: #e5e5e5;
-
-$background-color-primary: #f1f1f1;
-$background-color-secondary: $color-white;
-$background-color-tertiary: $color-primary;
-
-$border-width-base: 1px !default;
-$border-style-base: solid !default;
-$border-base: $border-width-base $border-style-base $border-color-base !default;
+$content-width: 1200px; // 内容宽度
+$text-size: 16px;
+$title-size: 18px;
+$nav-link-size: $title-size;
