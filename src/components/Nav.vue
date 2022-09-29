@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <Content>
+    <content>
       <nav class="navbar__nav">
         <RouterLink to="/">首页</RouterLink>
         <RouterLink to="/">申报书</RouterLink>
@@ -9,13 +9,12 @@
         <RouterLink to="/">成果应用</RouterLink>
         <RouterLink to="/">支撑材料</RouterLink>
       </nav>
-    </Content>
+    </content>
   </div>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import Content from './Content.vue'
 </script>
 
 <style lang="scss" scoped>

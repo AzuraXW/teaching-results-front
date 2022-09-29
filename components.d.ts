@@ -10,6 +10,8 @@ declare module '@vue/runtime-core' {
     Aside: typeof import('./src/components/layout/Aside.vue')['default']
     Content: typeof import('./src/components/Content.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCarousel: typeof import('element-plus/es')['ElCarousel']
+    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Layout: typeof import('./src/components/layout/Layout.vue')['default']
