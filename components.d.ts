@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     ElCol: typeof import('element-plus/es')['ElCol']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElResult: typeof import('element-plus/es')['ElResult']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
@@ -29,8 +30,11 @@ declare module '@vue/runtime-core' {
     Layout: typeof import('./src/components/layout/Layout.vue')['default']
     Main: typeof import('./src/components/layout/Main.vue')['default']
     Nav: typeof import('./src/components/Nav.vue')['default']
-    PdfPreview: typeof import('./src/components/PdfPreview.vue')['default']
+    PdfPreview: typeof import('./src/components/PdfPreview/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

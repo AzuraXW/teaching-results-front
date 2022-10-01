@@ -5,7 +5,15 @@
         <div class="content">
           <div class="content__title">申报书</div>
           <ul class="content__list">
-            <li v-for="item in contentData" :key="item.id">{{ item.name }}</li>
+            <TransitionGroup name="list" @before-enter="onBeforeEnter">
+              <li
+                v-for="(item, index) in contentData"
+                :key="item.id"
+                :data-index="index"
+              >
+                {{ item.name }}
+              </li>
+            </TransitionGroup>
           </ul>
         </div>
       </el-col>
@@ -21,7 +29,7 @@
             </el-breadcrumb>
           </div>
           <div class="article__content">
-            <PdfPreview :pdf-url="url"></PdfPreview>
+            <PdfPreview :pdf-url="test"></PdfPreview>
           </div>
         </div>
       </el-col>
@@ -31,15 +39,24 @@
 
 <script setup>
 import { ref } from "vue";
-import { RouterLink } from "vue-router";
 import { getColumnContent } from "../api/column";
-import PdfPreview from "../components/PdfPreview.vue";
+import PdfPreview from "../components/PdfPreview/index.vue";
 import url from "../assets/test.pdf";
 const contentData = ref([]); // 目录
 getColumnContent().then((res) => {
   console.log(res.data);
   contentData.value = res.data;
 });
+
+function onBeforeEnter(el) {
+  el.style = `transition-delay: ${el.dataset.index * 0.1}s`;
+}
+
+// 演示加载效果
+const test = ref("");
+setTimeout(() => {
+  test.value = url;
+}, 2000);
 </script>
 
 <style lang="scss" scoped>
@@ -57,6 +74,7 @@ getColumnContent().then((res) => {
   @include e(list) {
     background-color: #f7f7f7;
     padding: 15px;
+    transition: all 0.4s;
     li {
       height: 50px;
       line-height: 50px;
@@ -73,5 +91,14 @@ getColumnContent().then((res) => {
     align-items: center;
     border-bottom: 1px solid #e0e0e0;
   }
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.4s;
+}
+.list-enter-from,
+.list-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
 }
 </style>
