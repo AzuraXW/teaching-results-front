@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@element-plus/icons-vue': ^2.0.9
   '@rushstack/eslint-patch': ^1.1.4
   '@vitejs/plugin-vue': ^3.0.3
   '@vue/eslint-config-prettier': ^7.0.0
@@ -17,15 +18,20 @@ specifiers:
   unplugin-vue-components: ^0.22.7
   vite: ^3.0.9
   vue: ^3.2.38
+  vue-pdf-embed: ^1.1.4
   vue-router: ^4.1.5
+  vue3-pdfjs: ^0.1.6
 
 dependencies:
+  '@element-plus/icons-vue': 2.0.9_vue@3.2.39
   axios: 0.27.2
   element-plus: 2.2.17_vue@3.2.39
   normalize.css: 8.0.1
   pinia: 2.0.22_vue@3.2.39
   vue: 3.2.39
+  vue-pdf-embed: 1.1.4_vue@3.2.39
   vue-router: 4.1.5_vue@3.2.39
+  vue3-pdfjs: 0.1.6
 
 devDependencies:
   '@rushstack/eslint-patch': 1.2.0
@@ -555,6 +561,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dommatrix/1.0.3:
+    resolution: {integrity: sha512-l32Xp/TLgWb8ReqbVJAFIvXmY7go4nTxxlWiAFyhoQw9RKEOHBZNnyGvJWqDVSPmq3Y9HlM4npqF/T6VMOXhww==}
+    dev: false
 
   /element-plus/2.2.17_vue@3.2.39:
     resolution: {integrity: sha512-MGwMIE/q+FFD3kgS23x8HIe5043tmD1cTRwjhIX9o6fim1avFnUkrsfYRvybbz4CkyqSb185EheZS5AUPpXh2g==}
@@ -1433,6 +1443,18 @@ packages:
     resolution: {integrity: sha512-c71n61F1skhj/jzZe+fWE9XDoTYjWbUwIKVwFftZ5IOgiX44BVkTkD+/803YDgR50tqeO4eXWxLyVHBLWQAD1g==}
     dev: true
 
+  /pdfjs-dist/2.16.105:
+    resolution: {integrity: sha512-J4dn41spsAwUxCpEoVf6GVoz908IAA3mYiLmNxg8J9kfRXc2jxpbUepcP0ocp0alVNLFthTAM8DZ1RaHh8sU0A==}
+    peerDependencies:
+      worker-loader: ^3.0.8
+    peerDependenciesMeta:
+      worker-loader:
+        optional: true
+    dependencies:
+      dommatrix: 1.0.3
+      web-streams-polyfill: 3.2.1
+    dev: false
+
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
@@ -1811,6 +1833,14 @@ packages:
       - supports-color
     dev: true
 
+  /vue-pdf-embed/1.1.4_vue@3.2.39:
+    resolution: {integrity: sha512-d4c7nM3LneWUiL4MssIyPHfGgVMRPh4Z7UgLsXMZ+lbAtH/6SBUFHdzZQLY2BASdh16BM/v6YCbmtQU+KIQdrg==}
+    peerDependencies:
+      vue: ^2.x || ^3.x
+    dependencies:
+      vue: 3.2.39
+    dev: false
+
   /vue-router/4.1.5_vue@3.2.39:
     resolution: {integrity: sha512-IsvoF5D2GQ/EGTs/Th4NQms9gd2NSqV+yylxIyp/OYp8xOwxmU8Kj/74E9DTSYAyH5LX7idVUngN3JSj1X4xcQ==}
     peerDependencies:
@@ -1828,6 +1858,21 @@ packages:
       '@vue/runtime-dom': 3.2.39
       '@vue/server-renderer': 3.2.39_vue@3.2.39
       '@vue/shared': 3.2.39
+    dev: false
+
+  /vue3-pdfjs/0.1.6:
+    resolution: {integrity: sha512-7UaWbsp8wNqB0y/rRlyo5yRb0S+XOkkSpmdUuS267Dhi07Pt4RFEetQ8inrpf/aTFJwGnW0Uc/UE4p376s+Zmw==}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      pdfjs-dist: 2.16.105
+      vue: 3.2.39
+    transitivePeerDependencies:
+      - worker-loader
+    dev: false
+
+  /web-streams-polyfill/3.2.1:
+    resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
+    engines: {node: '>= 8'}
     dev: false
 
   /webpack-sources/3.2.3:

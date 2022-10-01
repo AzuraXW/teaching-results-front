@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import Nav from './Nav.vue'
+import Nav from "./Nav.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +28,8 @@ import Nav from './Nav.vue'
       margin-right: 26px;
     }
 
-    @include e(name) {}
+    @include e(name) {
+    }
   }
 }
 </style>

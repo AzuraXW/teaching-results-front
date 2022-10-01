@@ -1,16 +1,16 @@
 <template>
-  <div class="c-layout" :class="{'c-layout--horizontal': props.horizontal}">
+  <div class="c-layout" :class="{ 'c-layout--horizontal': props.horizontal }">
     <slot></slot>
   </div>
 </template>
 
 <script setup>
-  const props = defineProps({
-    horizontal: {
-      type: Boolean,
-      default: false
-    }
-  })
+const props = defineProps({
+  horizontal: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

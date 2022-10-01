@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router"
-import afterEach from './afterEach'
-import Home from "../views/Home.vue"
+import { createRouter, createWebHistory } from "vue-router";
+import afterEach from "./afterEach";
+import Home from "../views/Home.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,17 +10,17 @@ const router = createRouter({
       name: "home",
       component: Home,
       meta: {
-        title: '首页'
-      }
+        title: "首页",
+      },
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
+      path: "/show/:id",
+      name: "show",
+      component: () => import("../views/Show.vue"),
     },
   ],
-})
+});
 
-router.afterEach(afterEach)
+router.afterEach(afterEach);
 
-export default router
+export default router;

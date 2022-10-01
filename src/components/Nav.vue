@@ -3,18 +3,30 @@
     <content>
       <nav class="navbar__nav">
         <RouterLink to="/">首页</RouterLink>
-        <RouterLink to="/">申报书</RouterLink>
-        <RouterLink to="/">成果报告</RouterLink>
-        <RouterLink to="/">成果视频</RouterLink>
-        <RouterLink to="/">成果应用</RouterLink>
-        <RouterLink to="/">支撑材料</RouterLink>
+        <RouterLink
+          :to="{
+            name: 'show',
+            params: {
+              id: nav.id,
+            },
+          }"
+          v-for="nav in columns"
+          :key="nav.id"
+          >{{ nav.name }}</RouterLink
+        >
       </nav>
     </content>
   </div>
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from "vue-router";
+import { getColumn } from "../api/column";
+import { ref } from "vue";
+const columns = ref([]);
+getColumn().then((res) => {
+  columns.value = res.data;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +48,7 @@ import { RouterLink } from 'vue-router'
       margin: 0 6px;
 
       &:not(:last-child)::after {
-        content: '';
+        content: "";
         border-left: 1px solid #fff;
         height: 50%;
         background: #fff;
