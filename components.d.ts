@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     PdfPreview: typeof import('./src/components/PdfPreview/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tool: typeof import('./src/components/PdfPreview/tool.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

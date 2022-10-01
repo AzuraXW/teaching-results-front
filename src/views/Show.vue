@@ -29,6 +29,9 @@
             </el-breadcrumb>
           </div>
           <div class="article__content">
+            <h2 class="article__content__title">
+              以课堂教学改革为突破口的一流本科教育川大实践
+            </h2>
             <PdfPreview :pdf-url="test"></PdfPreview>
           </div>
         </div>
@@ -90,6 +93,15 @@ setTimeout(() => {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #e0e0e0;
+  }
+  @include e(content) {
+    @include e(title) {
+      font-size: 30px;
+      color: #295eb2;
+      text-align: center;
+      line-height: 36px;
+      font-weight: normal;
+    }
   }
 }
 .list-enter-active,

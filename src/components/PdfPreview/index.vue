@@ -21,33 +21,11 @@
       </div>
 
       <div class="pdf-preview__tools">
-        <div class="pdf-preview__tools__item">
-          <span @click="toPrev">上一页</span>
-        </div>
-        <div class="pdf-preview__tools__item">
-          <span @click="toNext">下一页</span>
-        </div>
-        <div class="pdf-preview__tools__item pdf-preview__tools__item--center">
-          <div style="margin-right: 25px">
-            <el-input
-              v-model="inputPage"
-              size="small"
-              @blur="changePage"
-              :input-style="{
-                width: '20px',
-                textAlign: 'center',
-                fontSize: '16px',
-              }"
-            />
-          </div>
-          <div>/ {{ pdfState.numPages }}</div>
-        </div>
-        <div class="pdf-preview__tools__item">
-          <span @click="zoomIn">放大</span>
-        </div>
-        <div class="pdf-preview__tools__item">
-          <span @click="zoomOut">缩小</span>
-        </div>
+        <Tool
+          v-model:pageNum="pdfState.pageNum"
+          v-model:scale="pdfState.scale"
+          :total="pdfState.numPages"
+        ></Tool>
       </div>
     </div>
 
@@ -67,7 +45,8 @@
 
 <script setup>
 import VuePdfEmbed from "vue-pdf-embed";
-import { computed, ref, watch, watchEffect } from "vue";
+import { ref, watch, computed } from "vue";
+import Tool from "./tool.vue";
 import usePdf from "./usePdf";
 const props = defineProps({
   pdfUrl: {
@@ -85,50 +64,7 @@ watch(
 );
 const { pdfLoaded, pdfLoadingFailed, loading, isPdfLoadFailed, pdfState } =
   usePdf(pdfUrl);
-
-// 跳转上一页
-function toPrev() {
-  if (pdfState.pageNum === 1) return;
-  pdfState.pageNum--;
-}
-
-// 跳转下一页
-function toNext() {
-  if (pdfState.pageNum >= pdfState.numPages) return;
-  pdfState.pageNum++;
-}
-const scaleStyle = computed(() => `transform: scale(${pdfState.scale})`);
-// 放大
-function zoomIn() {
-  if (pdfState.scale < 2) {
-    pdfState.scale += 0.1;
-  }
-}
-
-// 缩小
-function zoomOut() {
-  if (pdfState.scale > 1) {
-    pdfState.scale -= 0.1;
-  }
-}
-
-let inputPage = ref(pdfState.pageNum);
-function changePage() {
-  if (
-    !/^\d+$/.test(inputPage.value) ||
-    inputPage.value < 1 ||
-    inputPage.value > pdfState.numPages
-  ) {
-    inputPage.value = 1;
-    pdfState.pageNum = 1;
-    return;
-  }
-  pdfState.pageNum = parseInt(inputPage.value);
-}
-watchEffect(() => {
-  inputPage.value = pdfState.pageNum;
-});
-
+const scaleStyle = computed(() => `transform: scale(${pdfState.scale});`);
 function refreshPage() {
   location.reload();
 }
@@ -136,9 +72,6 @@ function refreshPage() {
 
 <style lang="scss" scoped>
 @include b(pdf-preview) {
-  :deep .el-loading-text {
-    color: #fff;
-  }
   position: relative;
   width: 80%;
   margin: 0 auto;
@@ -148,6 +81,16 @@ function refreshPage() {
   /* padding: 20px 50px 120px 50px; */
   box-sizing: border-box;
   background: #f7f7f7;
+  :deep .el-loading-text {
+    color: #fff;
+  }
+  @include e(tools) {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 70%;
+    transform: translateX(-50%);
+  }
   @include e(result) {
     position: absolute;
     left: 50%;
@@ -157,41 +100,6 @@ function refreshPage() {
   @include e(wrapper) {
     margin: 50px;
     overflow: auto;
-  }
-  @include e(tools) {
-    position: absolute;
-    bottom: 30px;
-    width: 70%;
-    height: 60px;
-    background-color: #000;
-    left: 50%;
-    border-radius: 30px;
-    background-color: rgb(66, 66, 66);
-    transform: translateX(-50%);
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    color: #fff;
-    @include e(item) {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      @include m(center) {
-        display: flex;
-        align-items: center;
-      }
-      span {
-        display: block;
-        color: #fff;
-        padding: 10px;
-        transition: all 0.4s;
-        cursor: pointer;
-        user-select: none;
-        &:hover {
-          color: #c6c6c6;
-        }
-      }
-    }
   }
 }
 @include b(vue-pdf-embed) {
