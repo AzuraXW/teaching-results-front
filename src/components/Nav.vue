@@ -60,6 +60,9 @@ getColumn().then((res) => {
       &:hover {
         background-color: $color-hover;
       }
+      &.router-link-exact-active {
+        background-color: $color-hover;
+      }
     }
   }
 }

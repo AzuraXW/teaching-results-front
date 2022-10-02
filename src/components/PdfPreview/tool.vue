@@ -1,5 +1,12 @@
 <template>
-  <div class="pdf-preview__tools-inner">
+  <div
+    class="pdf-preview__tools-inner"
+    :class="[
+      props.suspend
+        ? 'pdf-preview__tools-inner--suspend'
+        : 'pdf-preview__tools-inner--fixed',
+    ]"
+  >
     <div class="pdf-preview__tools-inner__item">
       <span @click="toPrev">上一页</span>
     </div>
@@ -46,6 +53,10 @@ const props = defineProps({
   total: {
     required: true,
     type: Number,
+  },
+  suspend: {
+    default: false,
+    type: Boolean,
   },
 });
 
@@ -99,12 +110,26 @@ watchEffect(() => {
   @include e(tools-inner) {
     height: 60px;
     background-color: #000;
-    border-radius: 30px;
     background-color: rgb(66, 66, 66);
     padding: 0 40px;
     display: flex;
     align-items: center;
     color: #fff;
+    box-sizing: border-box;
+    @include m(suspend) {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      width: 40%;
+      transform: translateX(-50%);
+      border-radius: 30px;
+    }
+    @include m(fixed) {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+    }
     @include e(item) {
       flex: 1;
       display: flex;

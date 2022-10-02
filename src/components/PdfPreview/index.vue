@@ -4,8 +4,9 @@
     v-loading="loading"
     element-loading-background="rgba(122, 122, 122, 0.8)"
     element-loading-text="pdf加载中..."
+    ref="pdfRef"
   >
-    <div v-show="!isPdfLoadFailed">
+    <template v-if="!isPdfLoadFailed">
       <div class="pdf-preview__wrapper">
         <el-scrollbar>
           <vue-pdf-embed
@@ -14,7 +15,7 @@
             :style="scaleStyle"
             @loading-failed="pdfLoadingFailed"
             @loaded="pdfLoaded"
-            ref="pdfRef"
+            ref="pdfEmbedRef"
             class="vue-pdf-embed"
           ></vue-pdf-embed>
         </el-scrollbar>
@@ -25,11 +26,12 @@
           v-model:pageNum="pdfState.pageNum"
           v-model:scale="pdfState.scale"
           :total="pdfState.numPages"
+          :suspend="isFullscreen"
         ></Tool>
       </div>
-    </div>
+    </template>
 
-    <div class="pdf-preview__result" v-show="isPdfLoadFailed">
+    <div class="pdf-preview__result" v-else>
       <el-result
         icon="error"
         title="PDF 加载失败"
@@ -40,14 +42,27 @@
         </template>
       </el-result>
     </div>
+    <div class="pdf-preview__tools-button">
+      <el-button circle @click="download">
+        <el-icon><Download /></el-icon>
+      </el-button>
+      <el-button circle @click="toggle">
+        <el-icon>
+          <FullScreen></FullScreen>
+        </el-icon>
+      </el-button>
+    </div>
   </div>
 </template>
 
 <script setup>
 import VuePdfEmbed from "vue-pdf-embed";
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
 import Tool from "./tool.vue";
 import usePdf from "./usePdf";
+import { FullScreen, Download } from "@element-plus/icons-vue";
+import { useFullscreen } from "@vueuse/core";
+
 const props = defineProps({
   pdfUrl: {
     required: true,
@@ -65,8 +80,30 @@ watch(
 const { pdfLoaded, pdfLoadingFailed, loading, isPdfLoadFailed, pdfState } =
   usePdf(pdfUrl);
 const scaleStyle = computed(() => `transform: scale(${pdfState.scale});`);
+
 function refreshPage() {
   location.reload();
+}
+
+const pdfRef = ref(); // 外层包裹元素
+const pdfEmbedRef = ref(); // pdf组件实例
+const { isFullscreen, toggle } = useFullscreen(pdfRef);
+
+onMounted(() => {
+  pdfRef.value.addEventListener("fullscreenchange", () => {
+    // 切换全屏模式时重新渲染pdf
+    pdfEmbedRef.value.render();
+    pdfState.scale = 1;
+  });
+});
+
+function download() {
+  let link = document.createElement("a");
+  link.style.display = "none";
+  link.href = props.pdfUrl;
+  link.setAttribute("download", "testfile.pdf");
+  document.body.appendChild(link);
+  link.click();
 }
 </script>
 
@@ -77,19 +114,17 @@ function refreshPage() {
   margin: 0 auto;
   margin-top: 30px;
   height: 1200px;
+  padding-bottom: 50px;
   overflow: hidden;
   /* padding: 20px 50px 120px 50px; */
   box-sizing: border-box;
   background: #f7f7f7;
-  :deep .el-loading-text {
+  display: flex;
+  justify-content: center;
+  :deep(.el-loading-text) {
     color: #fff;
   }
   @include e(tools) {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    width: 70%;
-    transform: translateX(-50%);
   }
   @include e(result) {
     position: absolute;
@@ -99,7 +134,13 @@ function refreshPage() {
   }
   @include e(wrapper) {
     margin: 50px;
+    flex: 1;
     overflow: auto;
+  }
+  @include e(tools-button) {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 @include b(vue-pdf-embed) {

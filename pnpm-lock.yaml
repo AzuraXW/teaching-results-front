@@ -5,6 +5,7 @@ specifiers:
   '@rushstack/eslint-patch': ^1.1.4
   '@vitejs/plugin-vue': ^3.0.3
   '@vue/eslint-config-prettier': ^7.0.0
+  '@vueuse/core': ^9.3.0
   axios: ^0.27.2
   element-plus: ^2.2.17
   eslint: ^8.22.0
@@ -24,6 +25,7 @@ specifiers:
 
 dependencies:
   '@element-plus/icons-vue': 2.0.9_vue@3.2.39
+  '@vueuse/core': 9.3.0_vue@3.2.39
   axios: 0.27.2
   element-plus: 2.2.17_vue@3.2.39
   normalize.css: 8.0.1
@@ -42,7 +44,7 @@ devDependencies:
   mockjs: 1.1.0
   prettier: 2.7.1
   sass: 1.55.0
-  unplugin-auto-import: 0.11.2
+  unplugin-auto-import: 0.11.2_@vueuse+core@9.3.0
   unplugin-vue-components: 0.22.7_vue@3.2.39
   vite: 3.1.3_sass@1.55.0
 
@@ -1711,7 +1713,7 @@ packages:
       unplugin: 0.9.6
     dev: true
 
-  /unplugin-auto-import/0.11.2:
+  /unplugin-auto-import/0.11.2_@vueuse+core@9.3.0:
     resolution: {integrity: sha512-1+VwBfn9dtiYv9SQLKP1AvZolUbK9xTVeAT+iOcEk4EHSFUlmIqBVLEKI76cifSQTLOJ3rZyPrEgptf3SZNLlQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1722,6 +1724,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.5.2
       '@rollup/pluginutils': 4.2.1
+      '@vueuse/core': 9.3.0_vue@3.2.39
       local-pkg: 0.4.2
       magic-string: 0.26.4
       unimport: 0.6.7
