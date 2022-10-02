@@ -26,7 +26,7 @@ const props = defineProps({
   },
   titleStyle: {
     required: true,
-    type: String,
+    type: Object,
   },
 });
 </script>

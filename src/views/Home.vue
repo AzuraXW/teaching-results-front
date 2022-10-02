@@ -1,6 +1,6 @@
 <template>
   <content style="padding: 30px 0">
-    <el-row gutter="20">
+    <el-row :gutter="20">
       <el-col :span="8">
         <el-skeleton
           style="width: 100%; height: 100%"
@@ -56,7 +56,7 @@
         </ColumnContainer>
       </el-col>
     </el-row>
-    <el-row gutter="20" style="margin-top: 25px">
+    <el-row :gutter="20" style="margin-top: 25px">
       <el-col :span="6">
         <ColumnContainer
           title="科学总结"
@@ -101,7 +101,7 @@
     <el-row style="margin-top: 25px">
       <el-col :span="24">
         <h2 style="margin-bottom: 10px">获奖荣誉</h2>
-        <PictureScroll :imgs-date="honors" :time="1500"></PictureScroll>
+        <PictureScroll :images="honors" :time="1500"></PictureScroll>
       </el-col>
     </el-row>
   </content>
@@ -129,10 +129,10 @@ let introduction = ref("");
 getIntroduction().then((res) => {
   introduction.value = res.data;
 });
-let honors = ref([])
+let honors = ref([]);
 getHonors().then((res) => {
-  honors.value = res.data
-})
+  honors.value = res.data;
+});
 </script>
 
 <style lang="scss" scoped>
