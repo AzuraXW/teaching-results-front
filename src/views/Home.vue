@@ -101,7 +101,7 @@
     <el-row style="margin-top: 25px">
       <el-col :span="24">
         <h2 style="margin-bottom: 10px">获奖荣誉</h2>
-        <PictureScroll :imgs-date="honors"></PictureScroll>
+        <PictureScroll :imgs-date="honors" :time="1500"></PictureScroll>
       </el-col>
     </el-row>
   </content>
