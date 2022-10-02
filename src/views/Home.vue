@@ -1,6 +1,6 @@
 <template>
   <content style="padding: 30px 0">
-    <el-row gutter="20">
+    <el-row :gutter="20">
       <el-col :span="8">
         <el-skeleton
           style="width: 100%; height: 100%"
@@ -56,7 +56,7 @@
         </ColumnContainer>
       </el-col>
     </el-row>
-    <el-row gutter="20" style="margin-top: 25px">
+    <el-row :gutter="20" style="margin-top: 25px">
       <el-col :span="6">
         <ColumnContainer
           title="科学总结"
@@ -98,6 +98,12 @@
         </ColumnContainer>
       </el-col>
     </el-row>
+    <el-row style="margin-top: 25px">
+      <el-col :span="24">
+        <h2 style="margin-bottom: 10px">获奖荣誉</h2>
+        <PictureScroll :images="honors" :time="1500"></PictureScroll>
+      </el-col>
+    </el-row>
   </content>
 </template>
 
@@ -106,8 +112,10 @@ import { ref } from "vue";
 import { getBanner } from "../api/banner";
 import { getIntroduction } from "@/api/introduction";
 import { getArticle } from "@/api/article";
+import { getHonors } from "@/api/honors";
 import ColumnContainer from "../components/ColumnContainer.vue";
 import ColumnList from "../components/ColumnList.vue";
+import PictureScroll from "../components/PictureScroll.vue";
 const banners = ref([]);
 getBanner().then((res) => {
   banners.value = res.data;
@@ -120,6 +128,10 @@ getArticle().then((res) => {
 let introduction = ref("");
 getIntroduction().then((res) => {
   introduction.value = res.data;
+});
+let honors = ref([]);
+getHonors().then((res) => {
+  honors.value = res.data;
 });
 </script>
 
