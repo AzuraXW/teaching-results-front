@@ -1,23 +1,25 @@
-import { fileURLToPath, URL } from "node:url"
+import { fileURLToPath, URL } from "node:url";
 
-import { defineConfig } from "vite"
-import vue from "@vitejs/plugin-vue"
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "./",
   plugins: [
     vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
+    // AutoImport({
+    //   resolvers: [ElementPlusResolver()],
+    // }),
     Components({
       resolvers: [ElementPlusResolver()],
-    }),],
+    }),
+  ],
   server: {
-    port: 3000
+    port: 3000,
   },
   resolve: {
     alias: {
@@ -34,4 +36,15 @@ export default defineConfig({
       },
     },
   },
-})
+  build: {
+    rollupOptions: {
+      manualChunks: {
+        axios: ["axios"],
+        vue: ["vue"],
+        "vue-pdf-embed": ["vue-pdf-embed"],
+        "vue3-pdfjs": ["vue3-pdfjs"],
+      },
+    },
+    minify: 'esbuild'
+  },
+});
